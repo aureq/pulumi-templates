@@ -6,13 +6,17 @@ template:
   important: true
   config:
     aws:region:
+      displayName: AWS Region code
       description: The AWS region to deploy into
       default: ap-southeast-2
     serviceName:
+      displayName: Service Name
       description: The resource name prefix for the resources to deploy
       default: aws-syd
     networkRange:
+      displayName: Network Range
       description: The IP addresses for your virtual private cloud (VPC).
     subnetMask:
+      displayName: Network Mask
       description: The network mask for each subnet.
       default: 255.255.240.0
