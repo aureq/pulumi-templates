@@ -1,9 +1,23 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as aws from "@pulumi/aws";
-import * as awsx from "@pulumi/awsx";
+import { AvailabilityZones } from "./utils/aws/availabilityzones";
+import { Vpc } from "./components/aws/vpc";
 
-// Create an AWS resource (S3 Bucket)
-const bucket = new aws.s3.Bucket("my-bucket");
+const projectConfig = new pulumi.Config();
 
-// Export the name of the bucket
-export const bucketName = bucket.id;
+export = async () => {
+
+    const serviceName = projectConfig.require("serviceName");
+
+    const Azs = new AvailabilityZones(await AvailabilityZones.WithState('available'));
+    const network = new Vpc(serviceName, {
+        ownerEmail: projectConfig.get("ownerEmail") || "devops@example.net",
+        cidrBlock: projectConfig.require('networkRange'),
+        subnetMask: projectConfig.require('subnetMask'),
+        availabilityZones: Azs.AvailabilityZonesNames,
+    });
+
+    return {
+
+    }
+}
