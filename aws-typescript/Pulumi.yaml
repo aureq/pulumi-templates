@@ -2,7 +2,7 @@ name: ${PROJECT}
 description: ${DESCRIPTION}
 runtime: nodejs
 template:
-  description: A minimal AWS TypeScript Pulumi program with a Landing Zone
+  description: A modern AWS TypeScript Pulumi program with a Landing Zone
   important: true
   config:
     aws:region:
