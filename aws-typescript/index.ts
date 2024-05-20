@@ -9,15 +9,17 @@ export = async () => {
 
     const serviceName = projectConfig.require("serviceName");
 
+    const projectOwner = projectConfig.get("ownerEmail") || "devops@example.net";
+
     const Azs = new AvailabilityZones(await AvailabilityZones.WithState('available'));
     const network = new Vpc(serviceName, {
-        ownerEmail: projectConfig.get("ownerEmail") || "devops@example.net",
+        ownerEmail: projectOwner,
         cidrBlock: projectConfig.require('networkRange'),
         subnetMask: projectConfig.require('subnetMask'),
         availabilityZones: Azs.AvailabilityZonesNames,
     });
 
     return {
-
+        owner: projectOwner,
     }
 }
