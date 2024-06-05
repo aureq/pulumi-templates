@@ -137,6 +137,7 @@ export = async () => {
         instance: wpInstance.id
     }, { parent: wpInstance });
 
+    if ( existsSync("tmp") !== true) mkdirSync("tmp");
     if ( existsSync("tmp/files") !== true) mkdirSync("tmp/files");
     copyFileSync("files/wp-config.php.j2", "tmp/files/wp-config.php.j2");
 
