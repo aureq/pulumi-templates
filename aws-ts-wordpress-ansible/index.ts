@@ -141,6 +141,10 @@ export = async () => {
     if ( existsSync("tmp/files") !== true) mkdirSync("tmp/files");
     copyFileSync("files/wp-config.php.j2", "tmp/files/wp-config.php.j2");
 
+    const aptGetInstallCmd = new cmd.local.Command(`${serviceName}-apt-get-install`, {
+        create: "apt-get install -V gettext-base",
+    });
+
     const renderPlaybookCmd = new cmd.local.Command(`${serviceName}-render-playbook`, {
         create: "wget -q -O - https://raw.githubusercontent.com/pulumi/examples/master/aws-ts-ansible-wordpress/playbook.yml | envsubst > tmp/playbook_rendered.yml",
         environment: {
@@ -149,7 +153,7 @@ export = async () => {
             DB_USERNAME: dbUsername,
             DB_PASSWORD: dbPassword,
         },
-    });
+    }, { dependsOn: [ aptGetInstallCmd ]});
 
     const updatePythonCmd = new cmd.remote.Command(`${serviceName}-update-python`, {
         connection: {
