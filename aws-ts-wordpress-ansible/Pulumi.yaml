@@ -1,0 +1,18 @@
+name: ${PROJECT}
+runtime: nodejs
+description: ${DESCRIPTION}
+template:
+  description: A TypeScript Pulumi program to deploy Wordpress and Ansible on AWS
+  important: true
+  config:
+    aws:region:
+      description: The AWS region to deploy into
+      default: ap-southeast-2
+    serviceName:
+      description: The resource name prefix for the resources to deploy
+      default: aws-syd
+    networkRange:
+      description: The IP addresses for your virtual private cloud (VPC).
+    subnetMask:
+      description: The network mask for each subnet.
+      default: 255.255.240.0
