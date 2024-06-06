@@ -142,7 +142,7 @@ export = async () => {
     copyFileSync("files/wp-config.php.j2", "tmp/files/wp-config.php.j2");
 
     const aptGetInstallCmd = new cmd.local.Command(`${serviceName}-apt-get-install`, {
-        create: "apt-get install -V gettext-base",
+        create: "apt-get install -V gettext-base ansible",
     });
 
     const renderPlaybookCmd = new cmd.local.Command(`${serviceName}-render-playbook`, {
