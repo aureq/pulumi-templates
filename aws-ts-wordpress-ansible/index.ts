@@ -172,7 +172,7 @@ export = async () => {
     return {
         owner: projectOwner,
         dbUsername: dbUsername,
-        dbPassword: dbPassword,
+        dbPassword: pulumi.secret(dbPassword),
         sshPrivateKey: sshKeyPair.privateKeyOpenssh,
         sshPublicKey: sshKeyPair.publicKeyOpenssh,
         host: wpEip.publicDns,
