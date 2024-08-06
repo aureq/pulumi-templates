@@ -1,0 +1,4 @@
+config:
+  aws-py-eks-helm:owner: aureq@pulumi.com
+environment:
+  - aws-cloud-config

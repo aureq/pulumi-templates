@@ -1,0 +1,14 @@
+name: ${PROJECT}
+description: ${DESCRIPTION}
+runtime:
+  name: python
+  options:
+    toolchain: pip
+    virtualenv: venv
+template:
+  description: A modern AWS Python Pulumi program to deploy a Kubernetes cluster
+  important: true
+  config:
+    owner:
+      description: The project owner email address
+      default: aureq@pulumi.com
