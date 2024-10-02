@@ -21,7 +21,7 @@ export = async() => {
         "app.kubernetes.io/owner": appConfig.require("owner"),
     }
 
-    const namespace = new k8s.core.v1.Namespace("checkout-app", {
+    const namespace = new k8s.core.v1.Namespace(`${serviceName}-checkout-app`, {
         metadata: {
             labels: {
                 ...standardLabels
