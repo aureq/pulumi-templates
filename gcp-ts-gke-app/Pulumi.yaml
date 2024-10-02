@@ -1,0 +1,13 @@
+name: ${PROJECT}
+description: ${DESCRIPTION}
+runtime:
+  name: nodejs
+  options:
+    packagemanager: npm
+template:
+  description: A modern GCP TypeScript Pulumi program to deploy a Kubernetes cluster
+  important: true
+  config:
+    serviceName:
+      description: The resource name prefix for the resources to deploy
+      default: baguette-reports
