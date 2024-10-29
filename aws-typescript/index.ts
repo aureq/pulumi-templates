@@ -14,7 +14,7 @@ export = async () => {
     const Azs = new AvailabilityZones(await AvailabilityZones.WithState('available'));
     const network = new Vpc(serviceName, {
         ownerEmail: projectOwner,
-        cidrBlock: projectConfig.require('networkRange'),
+        cidrBlock: projectConfig.require('addressSpace'),
         subnetMask: projectConfig.require('subnetMask'),
         availabilityZones: Azs.AvailabilityZonesNames,
     });
