@@ -1,0 +1,16 @@
+name: ${PROJECT}
+description: ${DESCRIPTION}
+runtime:
+  name: nodejs
+  options:
+    packagemanager: npm
+template:
+  description: AcmeCorp's base blueprint to deploy Kubernetes applications using Pulumi
+  important: true
+  config:
+    serviceName:
+      description: The resource name prefix for the resources to deploy
+      default: change-me
+    owner:
+      description: Name of the department owning this application.
+      default: DevOpsDepartment
