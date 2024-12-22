@@ -58,7 +58,7 @@ export = async () => {
     }, { provider: clusterProvider, parent: appNamespace });
 
     const gitRemoteUrl = git.extractGitRemoteUrl("./.git/config", "origin");
-    if (gitRemoteUrl?.includes("git@github.com:aureq")) {
+    if (gitRemoteUrl?.includes("github.com/aureq")) {
         // Let's create a Pulumi DeploymentSchedule for drift detection
         const driftDetectionSchedule = new pulumiservice.DriftSchedule(`${serviceName}-drift-detection`, {
             organization: pulumi.getOrganization(),
