@@ -1,5 +1,7 @@
 import * as pulumi from "@pulumi/pulumi";
 import * as k8s from "@pulumi/kubernetes";
+import * as pulumiservice from "@pulumi/pulumiservice";
+import * as git from "./git";
 
 const appConfig = new pulumi.Config();
 
@@ -54,6 +56,25 @@ export = async () => {
             type: "LoadBalancer",
         }
     }, { provider: clusterProvider, parent: appNamespace });
+
+    const gitRemoteUrl = git.extractGitRemoteUrl("./.git/config", "origin");
+    if (gitRemoteUrl?.includes("git@github.com:aureq")) {
+        // Let's create a Pulumi DeploymentSchedule for drift detection
+        const driftDetectionSchedule = new pulumiservice.DriftSchedule(`${serviceName}-drift-detection`, {
+            organization: pulumi.getOrganization(),
+            project: pulumi.getProject(),
+            stack: pulumi.getStack(),
+            autoRemediate: false,              // only warn about drift, do not remediate.
+            scheduleCron: "*/5 * * * *",
+            //               | | | | |
+            //               | | | | |         // see https://man7.org/linux/man-pages/man5/crontab.5.html
+            //               | | | | \-------- day of week
+            //               | | | \---------- month
+            //               | | \------------ day of the month
+            //               | \-------------- hour
+            //               \---------------- minutes
+        });
+    }
 
     return {
         name: appDeployment.metadata.name,
