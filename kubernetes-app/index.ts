@@ -80,6 +80,7 @@ export = async () => {
         name: appDeployment.metadata.name,
         serviceEndpoint: appService.status.apply(s => s.loadBalancer.ingress[0].hostname ? s.loadBalancer.ingress[0].hostname : s.loadBalancer.ingress[0].ip),
         healthCheckCommand: appService.status.apply(s => `wget -O - -q http://${s.loadBalancer.ingress[0].hostname ? s.loadBalancer.ingress[0].hostname : s.loadBalancer.ingress[0].ip}`),
-        driftCommand: pulumi.all([appNamespace.metadata.name, appDeployment.metadata.name]).apply(([namespaceName, deploymentName]) => `KUBECONFIG='/tmp/aureq/kubeconfig' pulumi env run ${pulumi.getOrganization()}/demos/cluster-access -- kubectl -n ${namespaceName} label deployment ${deploymentName} app.kubernetes.io/owner-`)
+        driftCommand: pulumi.all([appNamespace.metadata.name, appDeployment.metadata.name]).apply(([namespaceName, deploymentName]) => `KUBECONFIG='/tmp/aureq/kubeconfig' pulumi env run ${pulumi.getOrganization()}/demos/cluster-access -- kubectl -n ${namespaceName} label deployment ${deploymentName} app.kubernetes.io/owner-`),
+        kubeconfig: appConfig.require("kubeconfig"),
     };
 }
