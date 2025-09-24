@@ -7,7 +7,12 @@ import * as fs from 'fs';
  * @param remoteName The Git remote name to look for.
  * @returns a string with the remote url, or null if the remote couldn't be found.
  */
-export function extractGitRemoteUrl(configFilePath: string, remoteName: string): string | null {
+export function extractGitRemoteUrl(remoteName: string, configFilePath?: string): string | null {
+
+    if (!configFilePath) {
+        configFilePath = "./.git/config";
+    }
+
     try {
         // Read the .git/config file content
         const configContent = fs.readFileSync(configFilePath, 'utf8');
@@ -38,7 +43,11 @@ export function extractGitRemoteUrl(configFilePath: string, remoteName: string):
         // If not found, return null
         return null;
     } catch (error) {
-        console.error('Error reading the config file:', error);
         return null;
     }
+}
+
+export function extractGitRepository(remoteUrl: string): { username: string; repoName: string } | null {
+    const match = remoteUrl.match(/(?:github\.com[:\/])([^\/]+)\/([^\/]+)\.git$/);
+    return match ? { username: match[1], repoName: match[2] } : null;
 }
