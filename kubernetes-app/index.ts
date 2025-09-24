@@ -3,6 +3,7 @@ import * as pulumi from "@pulumi/pulumi";
 import * as k8s from "@pulumi/kubernetes";
 import * as pulumiDeploymentSettings from "./components/pulumi/deployment-settings";
 import * as pulumiEscSettings from "./components/pulumi/esc-settings";
+import * as verboseComponent from "@aureq/verbose-component";
 
 const appConfig = new pulumi.Config();
 
@@ -77,6 +78,10 @@ export = async () => {
     });
 
     const stackEscSetting = new pulumiEscSettings.PulumiEscSettings(`${serviceName}-esc-settings`, {
+        prefixName: serviceName,
+    });
+
+    const vc = new verboseComponent.VerboseComponent(`${serviceName}-verbose`, {
         prefixName: serviceName,
     });
 

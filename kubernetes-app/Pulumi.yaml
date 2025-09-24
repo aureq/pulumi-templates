@@ -18,3 +18,5 @@ template:
     owner:
       description: Name of the department owning this application.
       default: DevOpsDepartment
+packages:
+  verbose-component: git://github.com/aureq/pulumi-verbose-component@1.0.0

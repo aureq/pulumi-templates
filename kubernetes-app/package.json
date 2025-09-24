@@ -6,6 +6,7 @@
         "typescript": "^5.0.0"
     },
     "dependencies": {
+        "@aureq/verbose-component": "file:sdks/aureq-verbose-component",
         "@pulumi/aws": "^6.67.0",
         "@pulumi/kubernetes": "^4.19.0",
         "@pulumi/pulumi": "^3.143.0",
