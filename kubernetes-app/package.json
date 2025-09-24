@@ -6,8 +6,11 @@
         "typescript": "^5.0.0"
     },
     "dependencies": {
+        "@pulumi/aws": "^6.67.0",
         "@pulumi/kubernetes": "^4.19.0",
         "@pulumi/pulumi": "^3.143.0",
-        "@pulumi/pulumiservice": "^0.27.4"
-    }
+        "@pulumi/pulumiservice": "^0.29.0",
+        "yaml": "^2.7.0"
+    },
+    "packageManager": "npm@11.0.0"
 }
